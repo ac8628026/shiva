@@ -135,7 +135,17 @@ const GroupItem = styled.div`
   width: 529px;
   height: 60px;
 `;
-
+const FullName = styled.div`
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  letter-spacing: -0.01em;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  width: 164px;
+  height: 26px;
+`;
 const RectangleParent = styled.div`
   position: absolute;
   top: 0px;
@@ -144,7 +154,25 @@ const RectangleParent = styled.div`
   height: 92px;
  
 `;
-
+const EnterYourName = styled.div`
+position: absolute;
+  top: 32px;
+  left: 0px;
+  // border-radius: var(--br-8xs);
+  border: 1px solid var(--color-gray-100);
+  box-sizing: border-box;
+  width: 529px;
+  height: 60px;
+  font-size: var(--font-size-base);
+  letter-spacing: -0.01em;
+  font-weight: 500;
+  color: var(--color-gray-200);
+  display: flex;
+  align-items: center;
+  type="input"
+ 
+  
+`;
 const GroupDiv = styled.div`
   position: absolute;
   top: 259px;
@@ -159,7 +187,7 @@ const LogInHere = styled.span`
 `;
 const AlreadyHaveAnContainer = styled.div`
   position: absolute;
-  top: 700px;
+  top: 776px;
   left: 0px;
   font-size: var(--font-size-sm);
   letter-spacing: -0.01em;
@@ -194,7 +222,7 @@ const EmailAddress = styled.div`
 `;
 const RectangleGroup = styled.div`
   position: absolute;
-  top: 280px;
+  top: 383px;
   left: 0px;
   width: 529px;
   height: 92px;
@@ -258,7 +286,7 @@ const EyeIcon = styled.img`
 `;
 const RectangleContainer = styled.div`
   position: absolute;
-  top: 400px;
+  top: 507px;
   left: 0px;
   width: 529px;
   height: 92px;
@@ -292,7 +320,7 @@ const CheckIcon = styled.img`
 `;
 const IAgreeToAllTheTermsPrivParent = styled.div`
   position: absolute;
-  top: 530px;
+  top: 631px;
   left: 0px;
   width: 335px;
   height: 21px;
@@ -314,7 +342,6 @@ const CreateMyAccount = styled.div`
   left: 184px;
   letter-spacing: -0.01em;
   font-weight: 800;
-  cursor: pointer;
 `;
 const ArrowRightIcon = styled.img`
   position: absolute;
@@ -327,14 +354,14 @@ const ArrowRightIcon = styled.img`
 `;
 const RectangleParent1 = styled.div`
   position: absolute;
-  top: 600px;
+  top: 684px;
   left: 0px;
   width: 529px;
   height: 60px;
   color: var(--color-white);
   font-family: var(--font-source-sans-pro);
-  cursor: pointer;
-`;
+  
+  `;
 const GroupParent = styled.div`
   position: absolute;
   top: 163px;
@@ -389,12 +416,13 @@ const LoginRoot = styled.div`
   font-family: var(--font-source-sans-pro);
 `;
 
-const Login = () => {
+const SignUp = () => {
   const submitButtonRef=useRef(null);
 
   const [photoIndex, setPhotoIndex] = useState(0);
 
   const photos = ['/rectangle-1@2x.png', '/img1.avif', '/img2.avif','/img3.jpg'];
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [agree, setagree] = useState(false);
@@ -407,7 +435,12 @@ const Login = () => {
     setPhotoIndex((photoIndex - 1 + photos.length) % photos.length);
 
   };
-  
+  const handleNameChange = (event) => {
+    console.log("add");
+    setName(event.target.value);
+    
+
+  };
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -423,8 +456,10 @@ const Login = () => {
     event.preventDefault();
     // Here you can perform the authentication logic
     // For simplicity, let's just log the user information for now
+     console.log('Name:', name);
      console.log('Email:', email);
     console.log('Password:', password);
+    setName('');
     setEmail('');
     setPassword('');
 
@@ -460,28 +495,45 @@ arrow_circle_right
       </StyledButtonf>
 
       
-      <GroupParent >
+      <GroupParent>
         <CreateAccountParent>
-          <CreateAccount>Login</CreateAccount>
+          <CreateAccount>Create Account</CreateAccount>
           <LetsGetStarted>
             Let’s get started with your healing journey 
           </LetsGetStarted>
         </CreateAccountParent>
         <GroupContainer>
           <SignUpWithGoogleParent>
-            <SignUpWith>Sign in with Google</SignUpWith>
+            <SignUpWith>Sign up with Google</SignUpWith>
             <GoogleGLogo1Icon alt="" src="/google--g--logo-1@2x.png" />
           </SignUpWithGoogleParent>
           <GroupChild />
         </GroupContainer>
-        <OrParent>
-          <Or>OR</Or>
-          <LineDiv />
-          <GroupChild1 />
-        </OrParent>
         <form  onSubmit={handleSubmit}>
-           
-       
+            <GroupDiv>
+          <RectangleParent>
+            
+            <FullName>Full Name</FullName>
+          </RectangleParent >
+          <input style={{ position: 'absolute',
+    top: '32px',
+    left: '0px',
+    // borderRadius: 'var(--br-8xs)', // Uncomment if needed
+    border: '1px solid var(--color-gray-100)',
+    boxSizing: 'border-box',
+    width: '529px',
+    height: '60px',
+    fontSize: 'var(--font-size-xl)',
+    letterSpacing: '-0.01em',
+    fontWeight: '500',
+    color: 'var(--color-black)',
+    display: 'flex',
+    alignItems: 'center',}} type="text" name="name" minlength="2" placeholder='Enter Your Name' value={name} onChange={handleNameChange}></input>
+        </GroupDiv>
+        <AlreadyHaveAnContainer>
+          <AlreadyHaveAn>Already have an account?</AlreadyHaveAn>
+          <Link to="/login">Log in here.</Link>
+        </AlreadyHaveAnContainer>
         <RectangleGroup>
           {/* <GroupItem /> */}
          <input style={{
@@ -494,7 +546,7 @@ arrow_circle_right
     boxSizing: 'border-box',
     width: '529px',
     height: '60px',
-    position: 'relative',
+    position: 'absolute',
     color: 'var(--color-black)',
     letterSpacing: '-0.01em',
     fontWeight: '300',
@@ -503,11 +555,15 @@ arrow_circle_right
           <EmailAddress>Email Address
 </EmailAddress>
         </RectangleGroup>
-      
+        <OrParent>
+          <Or>OR</Or>
+          <LineDiv />
+          <GroupChild1 />
+        </OrParent>
         <RectangleContainer>
           {/* <GroupItem /> */}
        <input style={{
-  position: 'relative',
+  position: 'absolute',
   letterSpacing: '-0.01em',
   fontWeight: '500',
   color: 'var(--color-black)',
@@ -528,7 +584,7 @@ arrow_circle_right
         
         <IAgreeToAllTheTermsPrivParent>
           <IAgreeToContainer>
-            <AlreadyHaveAn>{`I agree to all the Terms, Privacy `}</AlreadyHaveAn>
+            <AlreadyHaveAn>{`I agree to all the `}</AlreadyHaveAn>
             <LogInHere>Terms</LogInHere>
             <AlreadyHaveAn>{`, `}</AlreadyHaveAn>
             <LogInHere>Privacy Policy</LogInHere>
@@ -539,8 +595,8 @@ arrow_circle_right
           {/* <GroupChild2 /> */}
           <input className='CheckIcon'  type='checkbox' checked={agree} onChange={handleagree} />
         </IAgreeToAllTheTermsPrivParent>
-        <RectangleParent1 type='button' >
-          <GroupChild3  type="button"   onClick={() => {
+        <RectangleParent1  >
+          <GroupChild3  type="button" style={{cursor: agree ? 'pointer' : 'not-allowed',}}   onClick={() => {
                     // Trigger a click event on the submit button
                     if (submitButtonRef.current) {
                         submitButtonRef.current.click();
@@ -548,14 +604,10 @@ arrow_circle_right
                 }}/>
           <CreateMyAccount >Create My Account
 </CreateMyAccount>
- <button type="submit" disabled={!agree} ref={submitButtonRef} style={{ display: 'none' }} >Submit</button>
+ <button type="submit" disabled={!agree}  ref={submitButtonRef} style={{ display: 'none' }} >Submit</button>
           <ArrowRightIcon alt="" src="/arrowright1.svg" />
         </RectangleParent1>
         </form>
-        <AlreadyHaveAnContainer>
-          <AlreadyHaveAn>Don't have an account?</AlreadyHaveAn>
-          <Link to="/"> Create New Account.</Link>
-        </AlreadyHaveAnContainer>
       </GroupParent>
       
       <ManagingPartnerFischerJordaParent>
@@ -569,4 +621,4 @@ arrow_circle_right
   );
 };
 
-export default Login;
+export default SignUp;
